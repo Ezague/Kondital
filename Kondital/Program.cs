@@ -20,6 +20,14 @@ class Program
         {
             intHvilePuls = b;
         }
+
+        //create a static method to calculate kondital
+        static double Kondital(int intMaxPuls, int intHvilePuls)
+        {
+            double intKondital = (double)intMaxPuls / intHvilePuls * 15.3;
+            return intKondital;
+        }
+        Console.WriteLine("Dit kondital er: " + Kondital(intMaxPuls, intHvilePuls));
     }
 }
 
