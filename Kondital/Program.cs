@@ -6,46 +6,35 @@ class Program
 {
     public static void Main()
     {
-        Kondital BrugerKondital = new Kondital();
         Console.Write("Indtast din max puls i heltal slag i minuttet: ");
-        string? MaxPuls = Console.ReadLine();
-        if (int.TryParse(MaxPuls, out int a))
-        {
-            BrugerKondital.MaxPuls = a;
-        }
-        Console.Write("Indtast din hvilepuls i heltal slag i minuttet: ");
-        string? HvilePuls = Console.ReadLine();
-        if (int.TryParse(HvilePuls, out int b))
-        {
-            BrugerKondital.HvilePuls = b;
-        }
-        Console.Write("Indtast din vægt i kg: ");
-        string? Vægt = Console.ReadLine();
-        if (double.TryParse(Vægt, out double c))
-        {
-            BrugerKondital.Vægt = c;
-        }
+        if (!int.TryParse(Console.ReadLine(), out int MaxPuls))
+            throw new Exception();
 
-        Console.WriteLine("Dit kondital er: " + BrugerKondital.BeregnKondital() + " ml/kg/min");
-        Console.WriteLine("Din maksimale iltindtagelse er: " + BrugerKondital.BeregnIltIndtagelse() + " l/ml");
+        Console.Write("Indtast din hvilepuls i heltal slag i minuttet: ");
+        if (!int.TryParse(Console.ReadLine(), out int HvilePuls))
+            throw new Exception();
+
+        Console.Write("Indtast din vægt i kg: ");
+        if (!double.TryParse(Console.ReadLine(), out double Vægt))
+            throw new Exception();
+
+        Console.WriteLine("Dit kondital er: " + Kondital.BeregnKondital(MaxPuls, HvilePuls) + " ml/kg/min");
+        Console.WriteLine("Din maksimale iltindtagelse er: " + Kondital.BeregnIltIndtagelse(MaxPuls, HvilePuls, Vægt) + " l/ml");
     }
 }
 
 class Kondital
 {
-    public int MaxPuls { get; set; }
-    public int HvilePuls { get; set; }
-    public double Vægt { get; set; }
 
-    public double BeregnKondital()
+    public static double BeregnKondital(int MaxPuls, int HvilePuls)
     {
         double intKondital = Math.Round((double)MaxPuls / HvilePuls * 15.3);
         return intKondital;
     }
 
-    public double BeregnIltIndtagelse()
+    public static double BeregnIltIndtagelse(int MaxPuls, int HvilePuls, double Vægt)
     {
-        double intIltIndtagelse = Math.Round((double)BeregnKondital() / Vægt * 1000);
+        double intIltIndtagelse = Math.Round((double)Kondital.BeregnKondital(MaxPuls, HvilePuls) / Vægt * 1000);
         return intIltIndtagelse;
     }
 }
