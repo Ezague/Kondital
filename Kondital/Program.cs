@@ -6,28 +6,21 @@ class Program
 {
     public static void Main()
     {
-        int intMaxPuls = -1;
-        int intHvilePuls = -1;
+        Kondital BrugerKondital = new Kondital();
         Console.Write("Indtast din max puls i heltal slag i minuttet: ");
         string? MaxPuls = Console.ReadLine();
         if (int.TryParse(MaxPuls, out int a))
         {
-            intMaxPuls = a;
+            BrugerKondital.MaxPuls = a;
         }
         Console.Write("Indtast din hvilepuls i heltal slag i minuttet: ");
         string? HvilePuls = Console.ReadLine();
         if (int.TryParse(HvilePuls, out int b))
         {
-            intHvilePuls = b;
+            BrugerKondital.HvilePuls = b;
         }
 
-        //create a static method to calculate kondital
-        static double Kondital(int intMaxPuls, int intHvilePuls)
-        {
-            double intKondital = Math.Round((double)intMaxPuls / intHvilePuls * 15.3);
-            return intKondital;
-        }
-        Console.WriteLine("Dit kondital er: " + Kondital(intMaxPuls, intHvilePuls));
+        Console.WriteLine("Dit kondital er: " + BrugerKondital.BeregnKondital());
     }
 }
 
@@ -36,9 +29,9 @@ class Kondital
     public int MaxPuls { get; set; }
     public int HvilePuls { get; set; }
 
-    public Kondital(int maxPuls, int hvilePuls)
+    public double BeregnKondital()
     {
-        MaxPuls = maxPuls;
-        HvilePuls = hvilePuls;
+        double intKondital = Math.Round((double)MaxPuls / HvilePuls * 15.3);
+        return intKondital;
     }
 }
