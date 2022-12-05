@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Kondital;
+namespace KonditalBeregner;
 
 class Program
 {
@@ -13,3 +13,14 @@ class Program
     }
 }
 
+class Kondital
+{
+    public int MaxPuls { get; set; }
+    public int HvilePuls { get; set; }
+
+    public Kondital(int maxPuls, int hvilePuls)
+    {
+        MaxPuls = maxPuls;
+        HvilePuls = hvilePuls;
+    }
+}
